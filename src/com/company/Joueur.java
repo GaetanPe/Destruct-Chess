@@ -3,18 +3,7 @@ import java.lang.*;
 import java.util.*;
 public class Joueur {
     public static void main() {
-        // tour joueur
-        boolean joueur = true;
-        double nombre;
-        nombre = Math.random();
-        nombre = nombre * 2;
-        int premier = (int) nombre;
-        if(premier == 0){
-            joueur = true;
-        }
-        else if(premier == 1){
-            joueur = false;
-        }
+
         //le choix du pseudo: On demande le nom des deux joueurs et on les rentre dans leur variables respectives
         // (pseudo1 pour le joueur 1 et pseudo2 pour le joueur 2)
 
@@ -35,6 +24,21 @@ public class Joueur {
             Scanner verif1 = new Scanner(System.in);
             System.out.println("Pseudo du joueur 1 trop long. Choisissez un autre pseudo.");
             pseudo1 = verif1.next();
+        }
+
+        // Joueur qui commence
+        boolean joueur = true;
+        double nombre;
+        nombre = Math.random();
+        nombre = nombre * 2;
+        int premier = (int) nombre;
+        if(premier == 0){
+            String pseudoJouer1 = pseudo1;
+            joueur = true;
+        }
+        else if(premier == 1){
+            String pseudoJouer2 = pseudo2;
+            joueur = false;
         }
         // Création des pions 1 et 2 en fonction de leurs coordonnées x et y.
         int pion1x = 4;
@@ -60,12 +64,13 @@ public class Joueur {
         // Afficher le tableau dans la console.
         // (k et l servant a naviguer verticalement et horizontalement dans le tableau.)
 
-        for(int k = 0; k < 10; k++){
+        for(int k = 0; k < 10; k++) {
             String ligne = "";
-            for(int l = 0; l < 11; l++) {
+            for (int l = 0; l < 11; l++) {
                 ligne += grille[k][l];
             }
             System.out.println(ligne);
+        }
 
         //On demande au joueur la direction dans laquelle il souhaite aller
         // puis on la stocke dans la variable direction.
@@ -115,7 +120,7 @@ public class Joueur {
                 }
                 break;
             }
-        }
+
 
 
     }
