@@ -1,5 +1,6 @@
 package com.company;
 import java.lang.*;
+import java.sql.SQLOutput;
 import java.util.*;
 public class Joueur {
     public static void main() {
@@ -76,13 +77,11 @@ public class Joueur {
         // puis on la stocke dans la variable direction.
 
         Scanner dir = new Scanner(System.in);
-        System.out.println("Dans quel direction voulez-vous aller ? ( haut / bas / gauche / droite)");
+        System.out.println("Dans quel direction voulez-vous aller ? ( H / B / G / D )");
         String direction = dir.next();
-
         //On vérifie que la réponse est bien une direction sinon on redemande au joueur la direction.
 
-        while(direction != "haut" || direction != "gauche" ||  direction != "droite" || direction != "bas"){
-            dir = new Scanner(System.in);
+        while(!direction.equals("H") && !direction.equals("G") &&  !direction.equals("D") && !direction.equals("B")){
             System.out.println("Veuillez choisir une direction (haut / bas / gauche / droite)");
             direction = dir.next();
         }
@@ -91,28 +90,29 @@ public class Joueur {
         // en prenant en compte quel joueur est actuellement en train de jouer.
 
         switch(direction) {
-            case "haut":
+            case "H":
                 if (joueur == true) {
                     pion1x--;
+
                 } else {
                     pion2x--;
                 }
                 break;
-            case "gauche":
+            case "G":
                 if (joueur == true) {
                     pion1y--;
                 } else {
                     pion2y--;
                 }
                 break;
-            case "droite":
+            case "D":
                 if (joueur == true) {
                     pion1y++;
                 } else {
                     pion2y++;
                 }
                 break;
-            case "bas":
+            case "B":
                 if (joueur == true) {
                     pion1x++;
                 } else {
