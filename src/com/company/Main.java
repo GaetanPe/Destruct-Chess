@@ -1,14 +1,7 @@
 package com.company;
-
-<<<<<<< HEAD
-public class Main {
-
-    public static void main(String[] args) {
-	// write your code here
-    }
-=======
 import java.util.Scanner;
 import java.util.*;
+
 
 public class Main {
 
@@ -30,6 +23,7 @@ public class Main {
             entree = reader.nextInt();
             switch (entree) {
                 case 1:
+                    Joueur.main();
                     break;
                 case 2:
                     break;
@@ -68,5 +62,5 @@ public class Main {
 
     }
 
->>>>>>> Menu
+
 }
