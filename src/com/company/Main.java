@@ -4,6 +4,9 @@ import java.util.*;
 
 
 public class Main {
+    static Scanner sc = new Scanner(System.in);
+    // Création du plateau de jeu avec grille un tableau en 2 dimensions de taille 11x10.
+    static String[][] grille = new String[10][11];
 
     public static void menuJeu(){
         System.out.println("             DestroyChesss      ");
@@ -31,6 +34,7 @@ public class Main {
                     RegleDuJeu.main();
                     break;
                 case 4:
+                    System.exit(0);
                     break;
                 default:
                     System.out.println("L'entree est incorrect");
@@ -38,14 +42,12 @@ public class Main {
             }
         }
 
-
     }
+
 
     public static void main(String[] args) {
 
 
-
-        int entree = 0;
         boolean retourMenu = false;
 
         do {
