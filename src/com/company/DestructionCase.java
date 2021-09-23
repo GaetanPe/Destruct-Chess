@@ -6,7 +6,7 @@ import com.company.Main;
 
 public class DestructionCase {
 
-     static int verifCaseX(){
+     /*static int verifCaseX(){
 
         return detruitCaseX;
     }
@@ -16,12 +16,11 @@ public class DestructionCase {
     }
 
     public static void main() {
-        Scanner destructX = new Scanner(System.in);
         System.out.println("Choisissez la coordonnée x de la case à détruire.");
-        int destructCaseX = destructX.nextInt();
-        Scanner destructY = new Scanner(System.in);
+        int destructCaseX = Main.sc.nextInt();
+
         System.out.println("Choisissez la coordonnée y de la case à détruire.");
-        int destructCaseY = destructY.nextInt();
+        int destructCaseY = Main.sc.nextInt();
 
       while(Main.grille[destructCaseX][destructCaseY] == Main.grille[pion1x][pion1y] || Main.grille[destructCaseX][destructCaseY] == Main.grille[pion2x][pion2y]){
             destructCaseX =verifCaseX();
@@ -39,5 +38,5 @@ public class DestructionCase {
         }
 
         Main.grille[destructCaseX][destructCaseY] = "[x]";
-    }
+    }*/
 }
