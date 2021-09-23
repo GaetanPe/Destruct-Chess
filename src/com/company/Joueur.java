@@ -88,7 +88,7 @@ public class Joueur {
             //On vérifie que la réponse est bien une direction sinon on redemande au joueur la direction.
 
             while(!direction.equals("H") && !direction.equals("G") &&  !direction.equals("D") && !direction.equals("B")){
-                System.out.println("Veuillez choisir une direction (haut / bas / gauche / droite)");
+                System.out.println("Veuillez choisir une direction (H / B / G / D)");
                 direction = Main.sc.next();
             }
 
