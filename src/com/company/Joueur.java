@@ -4,7 +4,7 @@ import java.sql.SQLOutput;
 import java.util.*;
 import com.company.Main;
 public class Joueur {
-
+    static boolean jeu = true;
    static boolean caseLibro;
 
 // Fonction permettant de savoir si il y a encore des case librre autour du joueur
@@ -34,8 +34,10 @@ public class Joueur {
        if ((verifCaseLibre(droite,ti))){
            pasDroite = true;
        }
-       if (pasHaut == true && pasBas == true && pasDroite == true && pasGauche == true){ // verification que toute les case sont occupé
+       if (pasHaut == false && pasBas == false && pasDroite == false && pasGauche == false){ // verification que toute les case sont occupé
            gameOver = true;
+           jeu = false;
+
        }
        return gameOver; // on retourne la variable pour savoir si il y a des case libres
    }
@@ -44,24 +46,29 @@ public class Joueur {
     public static boolean verifCaseLibre(int fi, int gi){
 
         boolean caseLibre = false;
-        String a = Main.grille[fi][gi]; // On range la valeur contenu dans le tab au coord x et y
-        if (a.equals("[ ]")) {         // On la compare avec le caractère qui défini une place vide dans le tab
+        if((fi < 10 && gi >=0)&&(fi < 11 && gi >=0)){
+            String a = Main.grille[fi][gi]; // On range la valeur contenu dans le tab au coord x et y
+            if (a.equals("[ ]")) {         // On la compare avec le caractère qui défini une place vide dans le tab
 
-            caseLibre = true;         // Si c'est le bon caractère alors on renvoie la valeur true
+                caseLibre = true;         // Si c'est le bon caractère alors on renvoie la valeur true
 
-        } else {
+            } else {
 
+                caseLibre = false;
+
+
+            }
+
+        }else{
+            System.out.println("Le joueur ne peut pas avancer");
             caseLibre = false;
         }
+
         return caseLibre;     // On renvoie soit la valeur true si case libre et false si occupé
     }
 
 
     public static void main() {
-
-        boolean jeu = true;
-
-
 
        boolean retourMenu = false;
     
@@ -105,16 +112,16 @@ public class Joueur {
         int pion1y = new Random().nextInt(11);
         int pion2x = new Random().nextInt(10);
         int pion2y = new Random().nextInt(11);
-
+// Utilisation d'une boucle for pour remplir la grille de cases. t étant la coordonnée x et i étant la coordonnée y.
+        int i;
+        for(int t = 0; t < 10; ++t) {
+            for(i = 0; i < 11; ++i) {
+                Main.grille[t][i] = "[ ]";
+            }
+        }
 
         do{
-            // Utilisation d'une boucle for pour remplir la grille de cases. t étant la coordonnée x et i étant la coordonnée y.
-            int i;
-            for(int t = 0; t < 10; ++t) {
-                for(i = 0; i < 11; ++i) {
-                    Main.grille[t][i] = "[ ]";
-                }
-            }
+
 
 
 
@@ -132,7 +139,8 @@ public class Joueur {
                 }
                 System.out.println(ligne);
             }
-
+            Main.grille [pion1x][pion1y] = "[ ]";
+            Main.grille [pion2x][pion2y] = "[ ]";
             //On demande au joueur la direction dans laquelle il souhaite aller
             // puis on la stocke dans la variable direction.
             String direction ="";
@@ -152,44 +160,80 @@ public class Joueur {
                 direction = Main.sc.next();
             }
 
+
+
             //On utilise un switch pour avancer le pion dans la direction souhaitée
             // en prenant en compte quel joueur est actuellement en train de jouer.
 
-            switch(direction) {
-
+            switch (direction) {
                 case "H":
-                    if (joueur == true) {
+
+                    if (joueur == true && verifCaseLibre((pion1x-1),pion1y) == true) { // On verifie pour quel joueur c'est le tour et si la case chosit es libre
+
                         pion1x--;
 
+                    } else if (joueur == false && verifCaseLibre((pion2x-1),pion2y) == true) {
 
-                    } else {
                         pion2x--;
                     }
                     break;
                 case "G":
-                    if (joueur == true) {
+                    if (joueur == true && verifCaseLibre(pion1x,(pion1y-1)) == true) {
                         pion1y--;
-                    } else {
+                        System.out.println("o"+pion1y);
+                    } else if (joueur == false && verifCaseLibre(pion2x,(pion2y-1)) == true){
                         pion2y--;
+                        System.out.println("P"+pion2y);
                     }
                     break;
                 case "D":
-                    if (joueur == true) {
+                    if (joueur == true && verifCaseLibre(pion1x,(pion1y+1)) == true ) {
                         pion1y++;
-                    } else {
+                    } else if (joueur == false && verifCaseLibre(pion2x,(pion2y+1)) == true) {
                         pion2y++;
                     }
                     break;
                 case "B":
-                    if (joueur == true) {
+                    if (joueur == true&& verifCaseLibre((pion1x+1),pion1y ) == true) {
                         pion1x++;
-                    } else {
+                    } else if (joueur == false && verifCaseLibre((pion2x+1),pion2y) == true ){
+
                         pion2x++;
                     }
                     break;
             }
+
+            if(joueur == true){
+                pasDeCase(pion1x, pion1y);
+
+            }
+            else{
+                pasDeCase(pion2x, pion2y);
+            }
+            do {
+
+                System.out.println("Rentrer une coordonné x : ");
+                Main.corX = Main.sc.nextInt();
+
+                System.out.println("Rentrer une coordonné y : ");
+                Main.corY = Main.sc.nextInt();
+
+                if (Main.corX > 10 || Main.corX < 0 || Main.corY > 9 || Main.corY < 0) {
+                    System.out.println("Entre incorrect");
+                }
+
+            } while (Main.corX > 10 || Main.corX < 0 || Main.corY > 9 || Main.corY < 0);
+
+            caseLibro = verifCaseLibre(Main.corX, Main.corY);
+
+            if (caseLibro == true){
+
+                Main.grille[Main.corX][Main.corY] = "[X]";
+            }
             joueur = !joueur;
         }while (jeu);
+
+
         int numScore = 0;
         while(Main.tableauScores[numScore] != null){
             numScore++;
@@ -202,28 +246,6 @@ public class Joueur {
         }
 
 
-           do {
-               Scanner xo = new Scanner(System.in);
-               System.out.println("Rentrer une coordonné x : ");
-               Main.corX = xo.nextInt();
-               Scanner yo = new Scanner(System.in);
-               System.out.println("Rentrer une coordonné y : ");
-               Main.corY = yo.nextInt();
-
-               if (Main.corX > 10 || Main.corX < 0 || Main.corY > 9 || Main.corY < 0) {
-                   System.out.println("Entre incorrect");
-               }
-
-           } while (Main.corX > 10 || Main.corX < 0 || Main.corY > 9 || Main.corY < 0);
-
-           caseLibro = verifCaseLibre(Main.corX, Main.corY);
-           System.out.println(caseLibro);
-
-
-           if (caseLibro == true){
-
-               Main.grille[Main.corX][Main.corY] = "[X]";
-           }
 
 
 
