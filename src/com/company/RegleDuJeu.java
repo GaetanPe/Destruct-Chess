@@ -3,6 +3,9 @@ package com.company;
 import java.util.Scanner;
 
 public class RegleDuJeu {
+    /**
+     * Cette classe permet d'afficher les règles du jeu.
+     */
     public static void main() {
 
         boolean retourMenu = false;

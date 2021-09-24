@@ -4,6 +4,9 @@ import com.company.Main;
 import java.util.Scanner;
 
 public class Score {
+    /**
+     * Cette classe permet d'afficher le tableau des scores.
+     */
     public static void main() {
 
         boolean retourMenu = false;
