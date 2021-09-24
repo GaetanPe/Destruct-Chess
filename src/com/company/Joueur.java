@@ -8,6 +8,13 @@ public class Joueur {
    static boolean caseLibro;
 
 // Fonction permettant de savoir si il y a encore des case librre autour du joueur
+    /**
+     * La méthode pasDeCase prend en paramètre deux entiers pi et ti et retourne un booléen gameOver.
+     * On initialise le booléen gameOver ainsi que 4 entiers : haut, bas, gauche et droite.
+     * On regarde si les cases autour de ti et pi sont libres.
+     * Si toutes les cases autour ne sont pas libre, on donne au booléen gameOver la valeur true.
+     * Sinon, la valeur reste à false.
+     */
    public static boolean pasDeCase (int pi,int ti){
 
        boolean gameOver = false;// declare la variable qui va etre retourner
@@ -43,6 +50,13 @@ public class Joueur {
    }
 
     // Fonction permettant de verifié si case est libre avec comme parametre les coordoné x et y du tab
+    /**
+     * Cette méthode vérifie si une case est libre.
+     * Elle prend en paramètres un entier fi et un entier gi.
+     * On crée d'abord un booléen caseLibre auquel on donne la valeur false.
+     * On regarde si la valeur de fi et gi se trouve dans le tableau puis on regarde si la case n'est pas déjà occupée.
+     * Si elle est vide, on passe la valeur de caseLibre à true. Sinon, elle reste à false.
+     */
     public static boolean verifCaseLibre(int fi, int gi){
 
         boolean caseLibre = false;

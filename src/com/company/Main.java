@@ -2,8 +2,11 @@ package com.company;
 import java.util.Scanner;
 import java.util.*;
 
-
+/**
+ * Cette classe permet d'afficher le menu principal du jeu.
+ */
 public class Main {
+
     static Scanner sc = new Scanner(System.in);
     // Création du plateau de jeu avec grille un tableau en 2 dimensions de taille 11x10.
     static String[][] grille = new String[10][11];
@@ -13,8 +16,12 @@ public class Main {
 
     static String[] tableauScores = new String[10];
 
-
+    /**
+     * Cette méthode permet d'afficher le menu principal du Destruct Chess ainsi que d'intéragir avec celui-ci.
+     * Il ne prend pas de paramètre et ne retourne rien.
+     */
     public static void menuJeu(){
+
         System.out.println("             DestroyChesss      ");
         System.out.println();
         System.out.println();

@@ -1,8 +1,11 @@
 package com.company;
 
 import java.util.Scanner;
-
+/**
+ * Cette classe permet d'afficher les règles du jeu.
+ */
 public class RegleDuJeu {
+
     public static void main() {
 
         boolean retourMenu = false;
