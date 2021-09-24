@@ -190,6 +190,16 @@ public class Joueur {
             }
             joueur = !joueur;
         }while (jeu);
+        int numScore = 0;
+        while(Main.tableauScores[numScore] != null){
+            numScore++;
+        }
+        if(joueur){
+            Main.tableauScores[numScore] = pseudo1;
+        }
+        else{
+            Main.tableauScores[numScore] = pseudo2;
+        }
 
 
            do {

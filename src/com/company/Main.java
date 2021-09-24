@@ -7,8 +7,12 @@ public class Main {
     static Scanner sc = new Scanner(System.in);
     // Création du plateau de jeu avec grille un tableau en 2 dimensions de taille 11x10.
     static String[][] grille = new String[10][11];
+
     static int corX;
     static int corY;
+
+    static String[] tableauScores = new String[10];
+
 
     public static void menuJeu(){
         System.out.println("             DestroyChesss      ");
@@ -31,6 +35,7 @@ public class Main {
                     Joueur.main();
                     break;
                 case 2:
+                    Score.main();
                     break;
                 case 3:
                     RegleDuJeu.main();
