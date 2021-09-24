@@ -6,7 +6,7 @@ import com.company.Main;
 
 public class DestructionCase {
 
-     static int verifCaseX(){
+/*     static int verifCaseX(){
 
         return detruitCaseX;
     }
@@ -38,5 +38,5 @@ public class DestructionCase {
         }
 
         Main.grille[destructCaseX][destructCaseY] = "[x]";
-    }
+    }*/
 }
