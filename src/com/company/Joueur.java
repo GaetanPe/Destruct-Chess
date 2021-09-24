@@ -46,7 +46,7 @@ public class Joueur {
     public static boolean verifCaseLibre(int fi, int gi){
 
         boolean caseLibre = false;
-        if((fi < 10 && gi >=0)&&(fi < 11 && gi >=0)){
+        if((fi < 10 && fi >=0)&&(gi < 11 && gi >=0)){
             String a = Main.grille[fi][gi]; // On range la valeur contenu dans le tab au coord x et y
             if (a.equals("[ ]")) {         // On la compare avec le caractère qui défini une place vide dans le tab
 
@@ -144,64 +144,74 @@ public class Joueur {
             //On demande au joueur la direction dans laquelle il souhaite aller
             // puis on la stocke dans la variable direction.
             String direction ="";
-            if(joueur == true){
-                System.out.println(pseudo1+" Dans quel direction voulez-vous aller ? ( H / B / G / D )");
-                direction = Main.sc.next();
-            }
-            else if(joueur == false){
-                System.out.println(pseudo2+" Dans quel direction voulez-vous aller ? ( H / B / G / D )");
-                direction = Main.sc.next();
-            }
+            boolean recoCaseL = false;
+           do {
 
-            //On vérifie que la réponse est bien une direction sinon on redemande au joueur la direction.
+               if (joueur == true) {
+                   System.out.println(pseudo1 + " Dans quel direction voulez-vous aller ? ( H / B / G / D )");
+                   direction = Main.sc.next();
+               } else if (joueur == false) {
+                   System.out.println(pseudo2 + " Dans quel direction voulez-vous aller ? ( H / B / G / D )");
+                   direction = Main.sc.next();
+               }
 
-            while(!direction.equals("H") && !direction.equals("G") &&  !direction.equals("D") && !direction.equals("B")){
-                System.out.println("Veuillez choisir une direction (H / B / G / D)");
-                direction = Main.sc.next();
-            }
+               //On vérifie que la réponse est bien une direction sinon on redemande au joueur la direction.
+
+               while (!direction.equals("H") && !direction.equals("G") && !direction.equals("D") && !direction.equals("B")) {
+                   System.out.println("Veuillez choisir une direction (H / B / G / D)");
+                   direction = Main.sc.next();
+               }
 
 
+               //On utilise un switch pour avancer le pion dans la direction souhaitée
+               // en prenant en compte quel joueur est actuellement en train de jouer.
 
-            //On utilise un switch pour avancer le pion dans la direction souhaitée
-            // en prenant en compte quel joueur est actuellement en train de jouer.
+               switch (direction) {
+                   case "H":
 
-            switch (direction) {
-                case "H":
+                       if (joueur == true && verifCaseLibre((pion1x - 1), pion1y) == true) { // On verifie pour quel joueur c'est le tour et si la case chosit es libre
 
-                    if (joueur == true && verifCaseLibre((pion1x-1),pion1y) == true) { // On verifie pour quel joueur c'est le tour et si la case chosit es libre
+                           pion1x--;
+                           recoCaseL = true;
 
-                        pion1x--;
+                       } else if (joueur == false && verifCaseLibre((pion2x - 1), pion2y) == true) {
 
-                    } else if (joueur == false && verifCaseLibre((pion2x-1),pion2y) == true) {
+                           pion2x--;
+                           recoCaseL = true;
+                       }
+                       break;
+                   case "G":
+                       if (joueur == true && verifCaseLibre(pion1x, (pion1y - 1)) == true) {
+                           pion1y--;
+                           recoCaseL = true;
+                           System.out.println("o" + pion1y);
+                       } else if (joueur == false && verifCaseLibre(pion2x, (pion2y - 1)) == true) {
+                           pion2y--;
+                           recoCaseL = true;
+                           System.out.println("P" + pion2y);
+                       }
+                       break;
+                   case "D":
+                       if (joueur == true && verifCaseLibre(pion1x, (pion1y + 1)) == true) {
+                           pion1y++;
+                           recoCaseL = true;
+                       } else if (joueur == false && verifCaseLibre(pion2x, (pion2y + 1)) == true) {
+                           pion2y++;
+                           recoCaseL = true;
+                       }
+                       break;
+                   case "B":
+                       if (joueur == true && verifCaseLibre((pion1x + 1), pion1y) == true) {
+                           pion1x++;
+                           recoCaseL = true;
+                       } else if (joueur == false && verifCaseLibre((pion2x + 1), pion2y) == true) {
 
-                        pion2x--;
-                    }
-                    break;
-                case "G":
-                    if (joueur == true && verifCaseLibre(pion1x,(pion1y-1)) == true) {
-                        pion1y--;
-                        System.out.println("o"+pion1y);
-                    } else if (joueur == false && verifCaseLibre(pion2x,(pion2y-1)) == true){
-                        pion2y--;
-                        System.out.println("P"+pion2y);
-                    }
-                    break;
-                case "D":
-                    if (joueur == true && verifCaseLibre(pion1x,(pion1y+1)) == true ) {
-                        pion1y++;
-                    } else if (joueur == false && verifCaseLibre(pion2x,(pion2y+1)) == true) {
-                        pion2y++;
-                    }
-                    break;
-                case "B":
-                    if (joueur == true&& verifCaseLibre((pion1x+1),pion1y ) == true) {
-                        pion1x++;
-                    } else if (joueur == false && verifCaseLibre((pion2x+1),pion2y) == true ){
-
-                        pion2x++;
-                    }
-                    break;
-            }
+                           pion2x++;
+                           recoCaseL = true;
+                       }
+                       break;
+               }
+           }while (recoCaseL == false);
 
             if(joueur == true){
                 pasDeCase(pion1x, pion1y);
@@ -218,11 +228,11 @@ public class Joueur {
                 System.out.println("Rentrer une coordonné y : ");
                 Main.corY = Main.sc.nextInt();
 
-                if (Main.corX > 10 || Main.corX < 0 || Main.corY > 9 || Main.corY < 0) {
+                if (Main.corX > 10 || Main.corX < 0 || Main.corY > 11 || Main.corY < 0) {
                     System.out.println("Entre incorrect");
                 }
 
-            } while (Main.corX > 10 || Main.corX < 0 || Main.corY > 9 || Main.corY < 0);
+            } while (Main.corX > 10 || Main.corX < 0 || Main.corY > 11 || Main.corY < 0);
 
             caseLibro = verifCaseLibre(Main.corX, Main.corY);
 
