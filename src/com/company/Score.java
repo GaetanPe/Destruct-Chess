@@ -2,11 +2,10 @@ package com.company;
 import com.company.Main;
 
 import java.util.Scanner;
-
+/**
+ * Cette classe permet d'afficher le tableau des scores.
+ */
 public class Score {
-    /**
-     * Cette classe permet d'afficher le tableau des scores.
-     */
     public static void main() {
 
         boolean retourMenu = false;
